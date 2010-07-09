@@ -14,9 +14,9 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    @files = Pathname.glob('public/static/*.html').map do |path|
-      {:name => ,:link => }
-    end
+#    @files = Pathname.glob('public/static/*.html').map do |path|
+#      {:name => ,:link => }
+#    end
     haml :index
   end
 end
