@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="reset.css" />
+  <link rel="stylesheet" type="text/css" href="jquery.ganttView.css" />
+  <style type="text/css">
+    body {
+      font-family: tahoma, verdana, helvetica;
+      font-size: 0.8em;
+      padding: 10px;
+    }
+  </style>
+  <title>jQuery Gantt</title>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/flick/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="date.js"></script>
+  <script type="text/javascript" src="jquery.jsPlumb-1.2-all-min.js"></script>
+  <script type="text/javascript" src="jquery.ganttView.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      var ganttData = [
+        {id: 1, name: "タスク1", start: new Date(2010,0,1), end: new Date(2010,0,6), days: 3},
+        {id: 2, name: "タスク2", start: new Date(2010,0,7), end: new Date(2010,0,9), days: 4, depends: [1]},
+        {id: 3, name: "タスク3", start: new Date(2010,0,8), end: new Date(2010,0,12), days: 2},
+        {id: 4, name: "タスク4", start: new Date(2010,0,5), end: new Date(2010,0,9), days: 4},
+        {id: 5, name: "タスク5", start: new Date(2010,0,14), end: new Date(2010,0,15), days: 5, depends: [2, 4]}
+      ]
+/*
+      for (var i = 6; i < 40; i++) {
+        ganttData.push({id: i, name: 'タスク'+i, start: new Date(2010,0,8), end: new Date(2010,0,12), days: 2})
+      }
+*/
+      $("#ganttChart").ganttView({
+        chartLang : {
+            days: "人日",
+            monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+        },
+        data: ganttData,
+        cellWidth: 21,
+        start: new Date(2010,0,1),
+        end: new Date(2010,4,15),
+        blockClick: function() {
+          console.log("click");
+        },
+        itemClick: function(data) {
+            console.log(data.id);
+        },
+        change: function(o,s,m) {
+//        console.log(o.data('block-data').id);
+        }
+      })
+    })
+  </script>
+</head>
+<body>
+  <div id="ganttChart"></div>
+</body>
+</html>
