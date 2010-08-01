@@ -1,4 +1,2 @@
+vendor
 .bundle
-relock
-log/*.log
-vendor/bundle
