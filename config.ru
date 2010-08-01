@@ -1,5 +1,4 @@
 require 'rubygems'
 require 'sinatra'
-
-use Rack::Static, :urls => ['/'], :root => 'public'
+get('/') { open('public/index.html').read }
 run Sinatra::Application
