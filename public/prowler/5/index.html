@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta name="apple-mobile-web-app-capable" />
+    <meta name="viewport" content="width=device-width" />
+    <title>canvas</title>
+    <style type="text/css">
+    /* <![CDATA[ */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #canvas {
+        margin: 0;
+        padding: 0;
+        width: 320px;
+        height: 320px;
+      }
+      canvas {
+        margin: 0;
+        padding: 0;
+        width: 320px;
+        height: 320px;
+      }
+    /* ]]> */
+    </style>
+    <!--[if IE]><script src="js/excanvas.js" type="text/javascript" charset="utf-8"></script><![endif]-->
+    <script src="js/game.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      onload = function() {
+        var g = game('canvas', 320, 320)
+        g.add(sand())
+        g.add(factory(16 * 9, 16 * 2))
+        g.add(fence(16 * 11, 16 * 2))
+        g.add(fence(16 * 8, 16 * 2))
+        g.add(fence(16 * 8, 16 * 1))
+        g.add(fence(16 * 9, 16 * 1))
+        g.add(fence(16 * 10, 16 * 1))
+        g.add(fence(16 * 11, 16 * 1))
+        g.add(den(16 * 2, 16 * 17))
+        g.add(drumcan(16 * 4, 16 * 4))
+        g.add(drumcan(16 * 4, 16 * 5))
+        g.add(drumcan(16 * 5, 16 * 4))
+        g.add(drumcan(16 * 5, 16 * 5))
+        g.add(drumcan(16 * 6, 16 * 12))
+        g.add(drumcan(16 * 6, 16 * 13))
+        g.add(drumcan(16 * 7, 16 * 12))
+        g.add(drumcan(16 * 7, 16 * 13))
+        g.add(drumcan(16 * 12, 16 * 6))
+        g.add(drumcan(16 * 12, 16 * 7))
+        g.add(drumcan(16 * 13, 16 * 6))
+        g.add(drumcan(16 * 13, 16 * 7))
+        g.add(drumcan(16 * 14, 16 * 14))
+        g.add(drumcan(16 * 14, 16 * 15))
+        g.add(drumcan(16 * 15, 16 * 14))
+        g.add(drumcan(16 * 15, 16 * 15))
+        g.addPlayer(hunter(160 - 8, 160 - 8))
+        g.start()
+      }
+      //]]>
+    </script>
+  </head>
+  <body>
+    <div id="canvas"></div>
+  </body>
+</html>

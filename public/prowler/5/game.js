@@ -136,14 +136,14 @@ var hunter = function(x, y, width, height) {
   that.game = null
   that.uid = new Date().getTime()
   that.src = {
-    n: [image('img/hunter_n_0.png', 16, 16),
-        image('img/hunter_n_1.png', 16, 16)],
-    e: [image('img/hunter_e_0.png', 16, 16),
-        image('img/hunter_e_1.png', 16, 16)],
-    s: [image('img/hunter_s_0.png', 16, 16),
-        image('img/hunter_s_1.png', 16, 16)],
-    w: [image('img/hunter_w_0.png', 16, 16),
-        image('img/hunter_w_1.png', 16, 16)]
+    n: [image('hunter_n_0.png', 16, 16),
+        image('hunter_n_1.png', 16, 16)],
+    e: [image('hunter_e_0.png', 16, 16),
+        image('hunter_e_1.png', 16, 16)],
+    s: [image('hunter_s_0.png', 16, 16),
+        image('hunter_s_1.png', 16, 16)],
+    w: [image('hunter_w_0.png', 16, 16),
+        image('hunter_w_1.png', 16, 16)]
   }
   that.dir = 's'
   that.distance = 2
@@ -285,19 +285,19 @@ var obstacle = function(img_src, x, y, width, height) {
 }
 
 var drumcan = function(x, y) {
-  return obstacle('img/drumcan.png', x, y, 16, 16)
+  return obstacle('drumcan.png', x, y, 16, 16)
 }
 
 var fence = function(x, y) {
-  return obstacle('img/fence.png', x, y, 16, 16)
+  return obstacle('fence.png', x, y, 16, 16)
 }
 
 var factory = function(x, y) {
-  return sprite_image('img/factory.png', x, y, 32, 16)
+  return sprite_image('factory.png', x, y, 32, 16)
 }
 
 var den = function(x, y) {
-  return sprite_image('img/den.png', x, y, 32, 16)
+  return sprite_image('den.png', x, y, 32, 16)
 }
 
 var map = function(img_src, x, y, width, height) {
@@ -306,9 +306,9 @@ var map = function(img_src, x, y, width, height) {
 }
 
 var tile = function(x, y, width, height) {
-  return map('img/tile.png', x, y, width, height)
+  return map('tile.png', x, y, width, height)
 }
 
 var sand = function(x, y, width, height) {
-  return map('img/sand.png', x, y, width, height)
+  return map('sand.png', x, y, width, height)
 }
