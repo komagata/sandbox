@@ -1,54 +1,3 @@
-var point = function(x, y) {
-  var that = {}
-  that.x = x
-  that.y = y
-  return that
-}
-
-var eventuality = function(that) {
-  var registry = {}
-
-  that.fire = function(event) {
-    var array, func, handler,
-        type = typeof event === 'string' ? event : event.type
-
-    if (registry.hasOwnProperty(type)) {
-      array = registry[type]
-      for (var i = 0; i < array.length; i++) {
-        handler = array[i]
-        func = handler.method
-        if (typeof func === 'string') {
-          func = this[func]
-        }
-        func.apply(this, handler.parameters || [event])
-      }
-    }
-    return this
-  }
-
-  that.on = function(type, method, parameters) {
-    var handler = {method: method, parameters: parameters}
-    if (registry,hasOwnProperty(type)) {
-      registry[type].push(handler)
-    } else {
-      registry[type] = [handler]
-    }
-    return this
-  }
-
-  return that
-}
-
-var image = function(src, width, height) {
-  if (width == null || height == null) {
-    var img = new Image
-  } else {
-    var img = new Image(width, height)
-  }
-  img.src = src
-  return img
-}
-
 var sprite = function(x, y, width, height) {
   var that = eventuality({})
   that.game = null
@@ -81,6 +30,110 @@ var sprite_image = function(img_src, x, y, width, height) {
   return that
 }
 
+var obstacle = function(img_src, x, y, width, height) {
+  var that = sprite_image(img_src, x, y, width, height)
+  that.is_obstacle = true
+  return that
+}
+
+var drumcan = function(x, y) {
+  return obstacle('drumcan.png', x, y, 16, 16)
+}
+
+var fence = function(x, y) {
+  return obstacle('fence.png', x, y, 16, 16)
+}
+
+var factory_0 = function(x, y) {
+  return sprite_image('factory.png', x, y, 16, 16)
+}
+
+var factory_1 = function(x, y) {
+  return sprite_image('factory.png', x, y, 16, 16)
+}
+
+var den_0 = function(x, y) {
+  return sprite_image('den.png', x, y, 16, 16)
+}
+
+var den_1 = function(x, y) {
+  return sprite_image('den.png', x, y, 16, 16)
+}
+
+var map = function(img_src, x, y, width, height) {
+  var that = sprite_image(img_src, x, y, 320, 320)
+  return that
+}
+
+var tile = function(x, y, width, height) {
+  return map('tile.png', x, y, width, height)
+}
+
+var sand = function(x, y, width, height) {
+  return map('sand.png', x, y, width, height)
+}
+
+var MAPS = [
+  sand,
+  factory_0,
+  factory_1,
+  den_0,
+  den_1,
+  fence,
+  drumcan
+]
+
+var point = function(x, y) {
+  var that = {};
+  that.x = x;
+  that.y = y;
+  return that;
+};
+
+var eventuality = function(that) {
+  var registry = {};
+
+  that.fire = function(event) {
+    var array, func, handler,
+        type = typeof event === 'string' ? event : event.type;
+
+    if (registry.hasOwnProperty(type)) {
+      array = registry[type];
+      for (var i = 0; i < array.length; i++) {
+        handler = array[i];
+        func = handler.method;
+        if (typeof func === 'string') {
+          func = this[func];
+        }
+        func.apply(this, handler.parameters || [event]);
+      }
+    }
+    return this;
+  };
+
+  that.on = function(type, method, parameters) {
+    var handler = {method: method, parameters: parameters};
+    if (registry.hasOwnProperty(type)) {
+      registry[type].push(handler);
+    } else {
+      registry[type] = [handler];
+    }
+    return this;
+  };
+
+  return that;
+};
+
+var image = function(src, width, height) {
+  if (width === null || height === null) {
+    var img = new Image;
+  } else {
+    var img = new Image(width, height);
+  }
+  img.src = src;
+  return img;
+}
+
 var game = function(elem, width, height) {
   var that = eventuality({})
   var ph = document.getElementById(elem)
@@ -107,6 +160,17 @@ var game = function(elem, width, height) {
     that.add(player)
   }
 
+  that.load_map = function(mapData) {
+    console.debug(MAPS)
+    for (var y = 0; y < 20; y++) {
+      for (var x = 0; x < 20; x++) {
+        console.debug(mapData[y][x])
+        console.debug(MAPS[0])
+        that.add(MAPS[mapData[y][x]](x * 16, y * 16))
+      }
+    }
+  }
+
   that.on('enterframe', function() {
     for (var i = 0; i < that.nodes.length; i++) {
       that.nodes[i].fire('enterframe')
@@ -123,8 +187,8 @@ var game = function(elem, width, height) {
     var IE='\v'=='v'
     var x = IE ? event.offsetX : (evt.offsetX || evt.layerX)
     var y = IE ? event.offsetY : (evt.offsetY || evt.layerY)
-    console.log('src_x: %o, src_y: %o, dest_x: %o, dest_y: %o',
-                that.player.x, that.player.y, x - 8, y - 8)
+//    console.log('src_x: %o, src_y: %o, dest_x: %o, dest_y: %o',
+//                that.player.x, that.player.y, x - 8, y - 8)
     that.player.buildPath(point(x - 8, y - 8))
   }
 
@@ -278,37 +342,4 @@ var hunter = function(x, y, width, height) {
   return that
 }
 
-var obstacle = function(img_src, x, y, width, height) {
-  var that = sprite_image(img_src, x, y, width, height)
-  that.is_obstacle = true
-  return that
-}
 
-var drumcan = function(x, y) {
-  return obstacle('drumcan.png', x, y, 16, 16)
-}
-
-var fence = function(x, y) {
-  return obstacle('fence.png', x, y, 16, 16)
-}
-
-var factory = function(x, y) {
-  return sprite_image('factory.png', x, y, 32, 16)
-}
-
-var den = function(x, y) {
-  return sprite_image('den.png', x, y, 32, 16)
-}
-
-var map = function(img_src, x, y, width, height) {
-  var that = sprite_image(img_src, x, y, 320, 320)
-  return that
-}
-
-var tile = function(x, y, width, height) {
-  return map('tile.png', x, y, width, height)
-}
-
-var sand = function(x, y, width, height) {
-  return map('sand.png', x, y, width, height)
-}
